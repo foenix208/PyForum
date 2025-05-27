@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>PyForum - Home</title>
     <link rel="stylesheet" href="../static/styles/style.css">
+    <style>
+
+    </style>
 </head>
 
 <body>
     <nav>
         <div>
             <a href="index.html" class="nav-lt">
-                <img src="../static/imgs/bird_2 2.png" height="60" alt="Site Logo - PyForume.com" placeholder="password">
+                <img src="../static/imgs/bird_2 2.png" height="60" alt="Site Logo - PyForume.com">
                 <h1><span>Py</span>Forum.com</h1>
             </a>
         </div>
@@ -20,13 +22,57 @@
             <input class="search-bar" type="text" placeholder="Search...">
         </div>
         <div class="nav-SL">
-            <a href="#">Sing Up</a>
-            <a href="#">Login</a>
+            <a href="signup">Sign Up</a>
+            <a href="login">Login</a>
         </div>
     </nav>
+
     <div class="content">
         <div class="nav-cl"></div>
-        <div class="pots-ct"></div>
+        <div class="pots-ct">
+            <!-- Exemple de post avec rond de profil -->
+            <div class="post">
+                <div class="profile-pic">A</div>
+                <div>
+                    <h3>Bienvenue sur PyForum!</h3>
+                    <p>Ceci est le tout premier post de notre communauté. N'hésitez pas à partager vos idées, projets ou questions liées à Python !</p>
+                    <div class="post-meta">
+                        <div class="post-info">
+                            <strong>Admin</strong>
+                            <span>le 27 mai 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="post">
+                <div class="profile-pic">D</div>
+                <div>
+                    <h3>Quel est votre éditeur Python préféré ?</h3>
+                    <p>Je suis curieux de savoir ce que vous utilisez au quotidien : VSCode, PyCharm, Vim, autre ? Partagez vos raisons !</p>
+                    <div class="post-meta">
+                        <div class="post-info">
+                            <strong>Dev42</strong>
+                            <span>le 26 mai 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="post">
+                <div class="profile-pic">L</div>
+                <div>
+                    <h3>Apprendre les bases de Flask</h3>
+                    <p>J’ai commencé à apprendre Flask pour créer un site web. Si vous avez des ressources à partager ou des conseils, je suis preneur !</p>
+                    <div class="post-meta">
+                        <div class="post-info">
+                            <strong>LunaDev</strong>
+                            <span>le 25 mai 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

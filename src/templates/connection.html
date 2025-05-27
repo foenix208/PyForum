@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PyForum</title>
+    <link rel="stylesheet" href="../static/styles/style.css">
+
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="/" class="nav-lt">
+                <img src="../static/imgs/bird_2 2.png" height="60" alt="Site Logo - PyForume.com">
+                <h1><span>Py</span>Forum.com</h1>
+            </a>
+        </div>
+        <div></div>
+        <div class="nav-SL">
+            <a href="signup">Sign Up</a>
+            <a href="login">Login</a>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+            <div class="signup-link">
+                Don't have an account? <a href="inscription">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

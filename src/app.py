@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import  hashlib # importe librairy pour hashage  
+import os
+import bcrypt
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template("index.html")    
-
 
 @app.route("/signup", methods=["GET", "POST"])
 def inscription():
@@ -21,9 +22,9 @@ def inscription():
     user VARCHAR(64),
     email VARCHAR(64),
     password VARCHAR(64),
+    salt VARCHAR(64),
     dt DATETIME DEFAULT CURRENT_TIMESTAMP)""")
     
-
     if request.method == "POST":
 
         #todo whith ... 
@@ -31,13 +32,15 @@ def inscription():
         email = request.form.get("email")
         password = request.form.get("password")
         
-        password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
-
-
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+        
         if not user or not email or not password:
             return "400 erreur - tous les champs sont requis", 400
 
-        cursor.execute("INSERT INTO Users (admin, user,email,password) VALUES (0,?,?,?);",(user,email,password_hash))
+        cursor.execute("INSERT INTO Users (admin, user, email, password, salt) VALUES (?, ?, ?, ?, ?);",
+               (0, user, email, hashed_password.decode(), salt.decode()))
+
         base.commit()
 
         return redirect(url_for('connection'))  # redirige vers la page de login
@@ -45,6 +48,8 @@ def inscription():
     # GET request => show the form
     base.close()
     return render_template("inscription.html")
+
+
 
 
 @app.route("/login", methods=["GET", "POST"])

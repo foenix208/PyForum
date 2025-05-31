@@ -3,6 +3,9 @@ import sqlite3
 import  hashlib # importe librairy pour hashage  
 import os
 import bcrypt
+import re
+
+
 
 app = Flask(__name__)
 
@@ -33,16 +36,20 @@ def inscription():
         password = request.form.get("password")
         
         salt = bcrypt.gensalt()
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-        
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt) # encryptage du password et ajoute d'une chaine de caracter pour rendre les Rainbow table null.
         if not user or not email or not password:
             return "400 erreur - tous les champs sont requis", 400
 
+
+        email_regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$'
+        if len(email) > 320 and not re.fullmatch(email_regex,email): 
+            #320 Le nombre maximum de caractères pour une adresse e-mail est de 320 caractères. Cela inclut à la fois la partie locale et la partie de domaine.
+            return "400 erreur - email invalide", 400
+
+
         cursor.execute("INSERT INTO Users (admin, user, email, password, salt) VALUES (?, ?, ?, ?, ?);",
                (0, user, email, hashed_password.decode(), salt.decode()))
-
         base.commit()
-
         return redirect(url_for('connection'))  # redirige vers la page de login
     
     # GET request => show the form
